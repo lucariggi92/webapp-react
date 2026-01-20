@@ -1,26 +1,42 @@
-export default function Header (){
-    const nomeApp ="";
-    return(
-        <div>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">{nomeApp}</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Movies</a>
-        </li>
-        
-              </ul>
-    </div>
-  </div>
-</nav>
-</div>
+import { NavLink } from "react-router-dom"
+
+export default function Header({ nameApp }) {
+
+    const links = [
+        {
+            title: "Home",
+            path: "/"
+        },
+        {
+            title: "Movies",
+            path: "/movies"
+        }]
+    return (
+        <div className="fixed-top"> 
+            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="#">{nameApp !== "" ? nameApp : "DefaultApp"}</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+
+
+
+                        <ul className="navbar-nav">
+
+                            {links.map((link) => (
+                                <li className="nav-item" key ={link.path}>
+                                    <NavLink className="nav-link" aria-current="page" to={link.path}>{link.title}</NavLink>
+                                </li>
+                            ))}
+                        </ul>
+
+
+
+                    </div>
+                </div>
+            </nav>
+        </div>
     )
 }
