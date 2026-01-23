@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import './App.css'
 import AppLayout from './layouts/AppLayout'
 import MoviesPage from './pages/MoviesPage'
+import MovieDetailsPage from './pages/MovieDetailsPage'
 
 function App() {
   const nameApp ="MoviesApp"
@@ -15,6 +16,7 @@ function App() {
       <Route element={<AppLayout nameApp={nameApp}/>}>
         <Route element={<Home/>} path="/"/>
                <Route element={<MoviesPage/>} path="/movies"/>
+               <Route element={<MovieDetailsPage/>} path="/movies/:id"/>
         
       </Route>
     </Routes>

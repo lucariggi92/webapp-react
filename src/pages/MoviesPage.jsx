@@ -1,25 +1,31 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import MovieCard from "../components/MovieCard"
 
 
 export default function MoviesPage() {
-    const [movies, setMovies]=useState([])
+    const [movies, setMovies] = useState([])
+
+    const backendBaseUrl = import.meta.env.VITE_BACKEND_URL
+
     useEffect(() => {
         axios
-            .get("http://localhost:3000/api/movies")
-            .then((resp) => { setMovies(resp.data.results)})
-            .catch((err) => { console.log(err)})
-
+            .get(`${backendBaseUrl}/api/movies`)
+            .then((resp) => { setMovies(resp.data.results) })
+            .catch((err) => { console.log(err) })
     }, [])
+
     return (
-
         <>
-            <h1>lista di tutti i film</h1>
-            <ul>{movies.map((movie)=>(
-                <li key ={movie.id}>{movie.title}</li>
-
-            ))}
-            </ul>
+            <section className="py-5 mt-5 container">
+                <h1>Lista di tutti i film</h1>
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                    {movies.map((movie) => (
+                        <div className="col" key={movie.id}>
+                            <MovieCard movie ={movie}/></div>
+                    ))}
+                </div>
+            </section>
         </>
     )
 }
